@@ -2,14 +2,14 @@
 document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
       
-      const response = await fetch('/logout', {
+      const response = await fetch('http://localhost:5500/logout', {
         method: 'GET',
         credentials: 'same-origin'
       });
       
       if (response.ok) {
         
-        window.location.href = '/login';
+        window.location.href = 'http://localhost:5500/';
       } else {
         console.error('Logout failed:', response.statusText);
         
