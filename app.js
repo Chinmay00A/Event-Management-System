@@ -22,19 +22,22 @@ app.get('/', (req, res) => {
   });
 
   //post method
-  app.post('/',async(req,res)=>{
+  app.post('/login',async(req,res)=>{
     try{
-        const [users] = await queries.getUserByEmail(req.body.email);
+      let ee=req.query.email;
+        const users = await queries.getUserByEmail(ee);
         if (users.length === 0) {
           return res.redirect('/');
         }
-        const user=users[0]
+        const user=users[0];
+       console.log(456)
         const passwordMatch=await bcrypt.compare(req.body.password,user.password);
         if(passwordMatch){
             req.session.user=user;
             return res.sendFile(path.join(__dirname, 'public', 'home.html'));
         }
         else{
+          console.log(123)
             return res.redirect('/');
         }
 

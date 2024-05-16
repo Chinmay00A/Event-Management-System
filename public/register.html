@@ -5,20 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register here</title>
+  <link rel="stylesheet" href="./css/login.css"
 </head>
 
 <body>
+    <div class="container">
   <h2>Sign Up</h2>
 
-  <form action="/register" method="POST" id="form-generate">
+  <form action="/register" method="POST" id="form-generate" class ="form-label">
     <label>Enter username</label><br>
     <input type="text"  name="username" id="username"placeholder="Username" required><br>
     <label>Enter your mail id</label><br>
     <input type="text" id ="email" name="email" placeholder="enter your email"><br>
     <label>Enter Your password</label><br>
     <input type="password" id="password" name="password" placeholder="Password" required><br>
-    <button id="btn" button>Register Here</button>
+    <button id="btn" type="submit">Register Here</button>
   </form>
+</div>
 
 </body>
 <script>

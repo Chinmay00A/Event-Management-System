@@ -11,8 +11,9 @@ const queries = {
   },
   getUserByEmail: async (email) => {
     try {
-      const [rows] = await connection.query('SELECT * FROM register WHERE email = ?', [email]);
-      return rows;
+      const Eows = await connection.query('SELECT * FROM register WHERE email = ?', [email]);
+      console.log(Eows);
+      return Eows;
     } catch (error) {
       throw error;
     }
