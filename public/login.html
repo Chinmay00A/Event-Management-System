@@ -18,9 +18,9 @@
 
         <form id="form" class="form-label">
             <label>Enter your EmailID</label><br>
-            <input type="text" id="email" placeholder="Enter your email"><br>
+            <input type="email" id="email" placeholder="Enter your email"><br>
             <label>Enter your password</label><br>
-            <input type="text" id="password" placeholder="Enter your password"><br>
+            <input type="password" id="password" placeholder="Enter your password"><br>
             <button type="submit" value="submit">Log in</button><br>
         </form>
     </div>
@@ -33,8 +33,8 @@
         const password = document.getElementById("password").value;
 
         const userdata = {
-            email: "sadasds",
-            password: "asdads"
+            email: email,
+            password: password
         };
         console.log(userdata)
         try {
