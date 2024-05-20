@@ -22,38 +22,35 @@ app.get('/', (req, res) => {
 });
 
 //post method
-app.post('/login', async (req, res) => {
+app.post('/', async (req, res) => {
   try {
-    console.log("req", req.body);
-    let ee = req.query.email;
+    let ee = req.body.email;
     const users = await queries.getUserByEmail(ee);
-    console.log(789);
+    
     if (users.length === 0) {
-      console.log(101112);
-      // res.sendFile(path.join(__dirname, 'public', 'register.html'));
-      return res.redirect('/register');
+      return res.redirect('/');
     } else {
-
-
       const user = users[0];
-      console.log(456);
-      const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-      if (passwordMatch) {
-        req.session.user = user;
-        return res.sendFile(path.join(__dirname, 'public', 'home.html'));
-      }
-      else {
-        console.log(123)
+      try {
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (passwordMatch) {
+          req.session.user = user;
+          return res.sendFile(path.join(__dirname, 'public', 'home.html'));
+        } else {
+          return res.redirect('/');
+        }
+      } catch (error) {
+        console.error('Error comparing passwords:', error);
         return res.redirect('/');
       }
     }
+  } catch (error) {
+    console.error('Error retrieving user by email:', error);
+    return res.redirect('/');
+  }
+});
 
-  }
-  catch (error) {
-    console.error('Error inserting user:', error);
-    res.redirect('/');
-  }
-})
+
 //register method here
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));

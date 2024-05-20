@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous">
+   
     <link rel="stylesheet" href="./css/login.css" />
 </head>
 
@@ -16,7 +14,7 @@
         <h2>New Here register here</h2>
         <a href="./register.html">Register</a>
 
-        <form id="form" class="form-label">
+        <form id="form" class="form-label" action="#">
             <label>Enter your EmailID</label><br>
             <input type="email" id="email" placeholder="Enter your email"><br>
             <label>Enter your password</label><br>
@@ -38,7 +36,7 @@
         };
         console.log(userdata)
         try {
-            const response = await fetch(`http://localhost:5500/login?email=${email}`, {
+            const response = await fetch(`http://localhost:5500/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,6 +44,7 @@
                 body: JSON.stringify(userdata),
             });
             console.log("response", response);
+
             if (response.ok) {
                 window.location.href = "http://localhost:5500/home.html";
             }
