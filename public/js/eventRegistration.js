@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               body: JSON.stringify(eventData)
           });
-
+          console.log(eventData);
           if (response.ok) {
               window.location.href = 'http://localhost:5500/dashboard.html'
           } else {

@@ -21,9 +21,10 @@ const queries = {
   addEventVenue: async (eventVenue) => { 
     try {
       const result = await connection.query('INSERT INTO events SET ?', eventVenue); 
+      return result;
+    }
+    catch(error){
       throw error;
-    }catch(error){
-      throw error
     }
   }
 };

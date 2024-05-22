@@ -14,12 +14,14 @@ const pool = mysql.createPool({
 
 const query = async (sql, values) => {
     const connection = await pool.getConnection();
+    console.log("connected to db")
     try {
-        const [rows, fields] = await connection.query(sql, values);
+        const [rows] = await connection.query(sql, values);
+        
         return rows;
     } finally {
         connection.release();
-        
+        console.log("db connecion released")
     }
 };
 

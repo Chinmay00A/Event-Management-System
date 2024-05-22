@@ -9,6 +9,7 @@ const app = express();
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(session({
   secret: 'secret',
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
   try {
     let ee = req.body.email;
+    
     const users = await queries.getUserByEmail(ee);
     
     if (users.length === 0) {
@@ -58,12 +60,21 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(req.body)
+    const username=req.body.username
+    const email=req.body.email
+    const password=req.body.password
+    console.log(username,email,password)
+    if (!username ||!email || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+    const salt=10
+    const hashedPassword = await bcrypt.hash(password, salt);
     const user = { username, email, password: hashedPassword };
     const result = await queries.insertUser(user);
 
     if (result) {
+
       res.redirect('/');
     } else {
       res.redirect('/register');
