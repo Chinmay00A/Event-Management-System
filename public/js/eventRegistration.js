@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const eventDate = document.getElementById('date').value;
       const eventTime = document.getElementById('time').value;
       const location = document.getElementById('location').value;
+      
 
       const eventData = {
           eventDetails: eventDetails,

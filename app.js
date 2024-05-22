@@ -26,10 +26,9 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
   try {
     let ee = req.body.email;
-    
     const users = await queries.getUserByEmail(ee);
     
-    if (users.length === 0) {
+    if (users && password) {
       return res.redirect('/');
     } else {
       const user = users[0];
@@ -92,7 +91,10 @@ app.get('/EventRegistation', (req, res) => {
 app.post('/EventRegistation', async (req, res) => {
   try {
     const { tittle, date, time, location } = req.body;
+    
     const events = { tittle, date, time, location };
+
+    console.log(events)
     const result = await queries.addEventVenue(events);
     if (result) {
       res.redirect('./dashboard')
